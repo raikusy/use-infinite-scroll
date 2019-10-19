@@ -31,7 +31,7 @@ const useInfiniteScroll = ({ loadData, loading, page }: PropTypes) => {
     return () => {
       intersectionObserver.current && intersectionObserver.current.disconnect();
     };
-  }, [node, loadData]);
+  }, [node, loadData, page, loading]);
   return [setNode];
 };
 

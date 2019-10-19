@@ -6,22 +6,25 @@ import './index.css';
 
 const App = () => {
   const [arr, setArr] = React.useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-  const rootRef = React.useRef(null);
+  // const rootRef = React.useRef(null);
   // const [node, setNode] = React.useState(rootRef.current);
   const [isLoading, setIsLoading] = React.useState(false);
   const [hasMore, setHasMore] = React.useState(true);
   const [page, setPage] = React.useState(1);
   const [error, setError] = React.useState(false);
-  const loadData = React.useCallback(page => {
-    setIsLoading(true);
-    setTimeout(() => {
-      const newArr = arr.concat(...arr.map(item => item + page * 10));
-      setArr(newArr);
-      console.log('last item reached');
-      setIsLoading(false);
-      setPage(page + 1);
-    }, 1000);
-  }, []);
+  const loadData = React.useCallback(
+    page => {
+      setIsLoading(true);
+      setTimeout(() => {
+        const newArr = arr.concat(...arr.map(item => item + page * 10));
+        setArr(newArr);
+        console.log('last item reached');
+        setIsLoading(false);
+        setPage(page + 1);
+      }, 1000);
+    },
+    [page]
+  );
   useScrollEvent({ isLoading, hasMore, loadData, error, page });
 
   return (
